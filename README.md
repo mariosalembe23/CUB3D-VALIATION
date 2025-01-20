@@ -78,3 +78,24 @@ C 225,30,0
 Observe que na linha marcada tem 0 com espaço por cima, isso é uma mapa inválido!
 
 **Entretanto, 0's não podem estar antecedidos ou acompanhados por espaços, em todas as direções**
+
+Podes eliminar o comentário de check_textures() para adicionar verificação das texturas, se realmente existem.
+
+```c
+static int	init_check(char **all_info, t_map_data map_data)
+{
+	if (!verify_data_textures(all_info, &map_data)
+		|| !verify_color_data(&map_data, all_info))
+		return (1);
+	if (!read_map(all_info, &map_data))
+		return (1);
+	if (!allocate_map(&map_data, all_info))
+		return (1);
+	if (!verify_deep(map_data.map, map_data.sizeMap))
+		return (1);
+	// if (!check_textures(&map_data))
+	// 	return (1);
+	return (0);
+}
+
+```
