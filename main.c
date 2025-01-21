@@ -6,7 +6,7 @@
 /*   By: msalembe <msalembe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:11:45 by msalembe          #+#    #+#             */
-/*   Updated: 2025/01/21 09:16:44 by msalembe         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:19:00 by msalembe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,20 @@ int	allocate_map(t_map_data *map_data, char **all_info)
 	return (1);
 }
 
-static int	init_check(char **all_info, t_map_data map_data)
+static int	init_check(char **all_info, t_map_data *map_data)
 {
-	if (!verify_data_textures(all_info, &map_data)
-		|| !verify_color_data(&map_data, all_info))
+	if (!verify_data_textures(all_info, map_data)
+		|| !verify_color_data(map_data, all_info))
 		return (1);
-	if (!read_map(all_info, &map_data))
+	if (!read_map(all_info, map_data))
 		return (1);
-	if (!allocate_map(&map_data, all_info))
+	if (!allocate_map(map_data, all_info))
 		return (1);
-	if (!verify_deep(map_data.map, map_data.sizeMap))
+	if (!verify_deep(map_data->map, map_data->sizeMap))
 		return (1);
 	// if (!check_textures(&map_data))
 	// 	return (1);
+	
 	return (0);
 }
 
@@ -59,6 +60,7 @@ char	*initial_read(char *file)
 	char	*current_line;
 	char	*buffer[4024];
 
+	*buffer = NULL;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		perror("Error openning file\n");
@@ -85,6 +87,15 @@ int	main(int ac, char **av)
 	char		**all_info;
 	char		*buffer;
 
+	map_data.NO = NULL;
+	map_data.EA = NULL;
+	map_data.C = NULL;
+	map_data.SO = NULL;
+	map_data.WE = NULL;
+	map_data.F = NULL;
+	map_data.sizeMap = 0;
+	map_data.map = NULL;
+
 	(void)ac;
 	if (ac != 2)
 	{
@@ -99,8 +110,18 @@ int	main(int ac, char **av)
 	all_info = ft_split(map_line, '\n');
 	free(map_line);
 	free(buffer);
-	if (init_check(all_info, map_data))
+	if (init_check(all_info, &map_data))
 		return (1);
 	printf("\033[32mThis map is valid \033[0m\n");
+	printf("NO: %s\n", map_data.NO);
+	printf("SO: %s\n", map_data.SO);
+	printf("WE: %s\n", map_data.WE);
+	printf("EA: %s\n", map_data.EA);
+	printf("F: %s\n", map_data.F);
+	printf("C: %s\n", map_data.C);
+	for (int i = 0; i < map_data.sizeMap; i++)
+	{
+		printf("%s\n", map_data.map[i]);
+	}
 	return (0);
 }
