@@ -6,7 +6,7 @@
 /*   By: msalembe <msalembe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 10:41:36 by msalembe          #+#    #+#             */
-/*   Updated: 2025/01/21 08:37:34 by msalembe         ###   ########.fr       */
+/*   Updated: 2025/01/21 09:26:32 by msalembe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,14 @@ int	check_extension(char *filename)
 	return (1);
 }
 
-int	read_map(char **all_info, t_map_data *map_data)
+int	verify_side(int x, int i, char **map)
 {
-	int	len;
-
-	len = mat_len(all_info);
-	map_data->sizeMap = 0;
-	while (len-- > 0)
+	if ((x > 0 && (map[i][x] == '0' && map[i][x - 1] == ' '))
+		|| (map[i][x] == '0' && map[i][x + 1] == ' '))
 	{
-		if (!line_valid(all_info[len]) && is_map_line(all_info[len]))
-		{
-			printf("Invalid map\n");
-			printf("%s\n", all_info[len]);
-			return (0);
-		}
-		if (is_map_line(all_info[len]))
-			map_data->sizeMap++;
+		printf("\033[31mMap not closed at (%d, %d)\033[0m\n", i, x);
+		printf("\033[31mAt line: %s\033[0m\n", map[i]);
+		return (0);
 	}
 	return (1);
 }
@@ -103,13 +95,8 @@ int	verify_deep(char **map, int sizeMap)
 				printf("\033[31mAt line: %s\033[0m\n", map[i]);
 				return (0);
 			}
-			if ((x > 0 && (map[i][x] == '0' && map[i][x - 1] == ' '))
-				|| (map[i][x] == '0' && map[i][x + 1] == ' '))
-			{
-				printf("\033[31mMap not closed at (%d, %d)\033[0m\n", i, x);
-				printf("\033[31mAt line: %s\033[0m\n", map[i]);
+			if (!verify_side(x, i, map))
 				return (0);
-			}
 			x++;
 		}
 		i++;
