@@ -6,7 +6,7 @@
 /*   By: msalembe <msalembe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 10:36:58 by msalembe          #+#    #+#             */
-/*   Updated: 2025/01/20 11:25:45 by msalembe         ###   ########.fr       */
+/*   Updated: 2025/01/21 08:38:08 by msalembe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define VALIDATION_H
 
 # include "gnl/get_next_line.h"
-
 # include <ctype.h>
 # include <fcntl.h>
 # include <stdio.h>

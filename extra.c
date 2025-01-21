@@ -6,7 +6,7 @@
 /*   By: msalembe <msalembe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 10:41:36 by msalembe          #+#    #+#             */
-/*   Updated: 2025/01/21 08:26:30 by msalembe         ###   ########.fr       */
+/*   Updated: 2025/01/21 08:37:34 by msalembe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,18 @@ int	line_valid(char *str)
 
 int	is_map_line(const char *line)
 {
-	for (int i = 0; line[i] != '\0'; i++)
+	int	i;
+
+	i = 0;
+	while (line[i] != '\0')
 	{
 		if (line[i] != '0' && line[i] != '1' && !isspace(line[i])
-			&& line[i] != 'N')
+			&& line[i] != 'N' && line[i] != 'S' && line[i] != 'E'
+			&& line[i] != 'W')
 		{
 			return (0);
 		}
+		i++;
 	}
 	return (1);
 }
