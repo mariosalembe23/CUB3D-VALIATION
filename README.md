@@ -14,6 +14,15 @@
 - mapa e cabe a você lidar com eles. Você deve ser capaz de analisar qualquer tipo de mapa,
 - desde que ele respeite as regras do mapa.
 
+
+## Validações feitas
+
+- Validação da extensão do arquivo(mapa)
+- Validação dos Elementos que devem estar no mapa
+- Validar as texturas, se elas estão corretas ou se existam
+- Validar se o mapa está fechado
+- Validação profunda de espaços(0) com espaços '32' seguidos
+
 ### Um mapa válido:
 
 ```c
@@ -35,7 +44,7 @@ C 225,30,0
     1000000000110000000000001
     1011000001110000000011111
 1111000000000000000000001
-111111111011000001110000000000001
+111111111011000001110000011111111
 100000000011000001110111111111111
 11110111111111011100000010001
 11110111111111011101010010001

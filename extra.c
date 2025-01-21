@@ -6,7 +6,7 @@
 /*   By: msalembe <msalembe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 10:41:36 by msalembe          #+#    #+#             */
-/*   Updated: 2025/01/20 11:37:37 by msalembe         ###   ########.fr       */
+/*   Updated: 2025/01/21 08:26:30 by msalembe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ int	check_extension(char *filename)
 	char	*extension;
 
 	extension = ft_strchr(filename, '.');
+	if (!extension)
+	{
+		printf("Invalid file extension\n");
+		return (0);
+	}
 	extension++;
 	if (ft_strncmp(extension, "cub", 3) != 0)
 	{
