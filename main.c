@@ -6,7 +6,7 @@
 /*   By: msalembe <msalembe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:11:45 by msalembe          #+#    #+#             */
-/*   Updated: 2025/01/21 11:19:00 by msalembe         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:23:55 by msalembe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ int	main(int ac, char **av)
 	if (init_check(all_info, &map_data))
 		return (1);
 	printf("\033[32mThis map is valid \033[0m\n");
+
+	// TESTING
 	printf("NO: %s\n", map_data.NO);
 	printf("SO: %s\n", map_data.SO);
 	printf("WE: %s\n", map_data.WE);
@@ -120,8 +122,6 @@ int	main(int ac, char **av)
 	printf("F: %s\n", map_data.F);
 	printf("C: %s\n", map_data.C);
 	for (int i = 0; i < map_data.sizeMap; i++)
-	{
 		printf("%s\n", map_data.map[i]);
-	}
 	return (0);
 }
